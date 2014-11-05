@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.ItemImageDAO">
+<!--
+    由系统于2014-08-18 23:58:24生成。
+-->
+    <select id="getByIds" resultType="com.hehua.item.domain.ItemImage">
+        select `id`,`cts`,`uts`,`itemid`,`imageid`,`imagelocation`,`ismaster` from `item_image` where `id` in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+    </select>
+
+</mapper>

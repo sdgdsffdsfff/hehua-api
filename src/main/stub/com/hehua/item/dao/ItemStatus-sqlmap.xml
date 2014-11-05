@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.ItemStatusDAO">
+<!--
+    由系统于2014-08-08 01:02:14生成。
+-->
+<select id="getItemStatuesByItemIds" resultType="com.hehua.item.domain.ItemStatus">
+    select * from `item_status` where `itemid` in <foreach item="itemid" index="index" collection="itemIds" open="(" separator="," close=")">#{itemid}</foreach>
+</select>
+
+</mapper>

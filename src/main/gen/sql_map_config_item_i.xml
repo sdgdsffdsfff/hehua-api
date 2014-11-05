@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    由系统于2014-09-12 15:02:10生成，请勿人为进行任何修改！
+-->
+<!DOCTYPE configuration PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+    <mappers>
+        <mapper resource="com/hehua/item/dao/BrandGroup-sqlmap.xml"/>
+        <mapper resource="com/hehua/item/dao/BrandgroupItem-sqlmap.xml"/>
+    </mappers>
+</configuration>

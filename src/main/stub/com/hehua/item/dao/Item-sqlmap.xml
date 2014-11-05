@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.ItemDAO">
+<!--
+    由系统于2014-08-08 01:02:14生成。
+-->
+<select id="getItemsByIds" resultType="com.hehua.item.domain.Item">
+    select * from `item` where `id` in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+</select>
+<select id="getItemLitesByIds" resultType="com.hehua.item.model.ItemLite">
+    select `id`,`name`,`originprice`,`realprice`,`image`,`sales`,`flashid` from `item` where `id` in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+</select>
+
+
+<select id="getItemBySearch"
+            resultType="com.hehua.item.domain.Item">
+        select `id`,`name`,`originprice`,`realprice`,`image`,`sales`,`flashid`,`status`,`cts` from `item`
+        <where>
+            <if test="minPrice > 0">
+                <![CDATA[
+                 realprice >= #{minPrice}
+                 ]]>
+            </if>
+            <if test="maxPrice > 0">
+                <![CDATA[
+                and realprice <= #{maxPrice}
+                ]]>
+            </if>
+            <if test="name != null and name != ''">
+                <![CDATA[
+                 and name = #{name}
+                 ]]>
+            </if>
+            <if test="status == 0">
+                <![CDATA[
+                 and status != #{status}
+                 ]]>
+            </if>
+        </where>
+    order by id desc limit #{start}, #{size}
+
+</select>
+    <select id="getItemBySearchCount"
+            resultType="java.lang.Integer">
+        select count(`id`) from `item`
+        <where>
+            <if test="status == 0">
+                <![CDATA[
+                 status != #{status}
+                 ]]>
+            </if>
+            <if test="minPrice > 0">
+                <![CDATA[
+                 and realprice >= #{minPrice}
+                 ]]>
+            </if>
+            <if test="name != null and name != ''">
+                <![CDATA[
+                 and name = #{name}
+                 ]]>
+            </if>
+            <if test="maxPrice > 0">
+                <![CDATA[
+                and realprice <= #{maxPrice}
+                ]]>
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

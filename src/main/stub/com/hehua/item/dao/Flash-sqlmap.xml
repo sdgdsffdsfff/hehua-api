@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.FlashDAO">
+<select id="getFlashesByIds" resultType="com.hehua.item.domain.Flash">
+    select * from `flash` where `id` in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+</select>
+    <select id="getFlashesByItemIds" resultType="com.hehua.item.domain.Flash">
+        select * from `flash`
+        <where>
+            <if test="ids != null">
+                  itemid in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+            </if>
+            <if test="startTime != null">
+                <![CDATA[
+                and onlinedate >= #{startTime}
+                ]]>
+            </if>
+            <if test="startTime != null">
+                <![CDATA[
+                and onlinedate <= #{endTime}
+                ]]>
+            </if>
+        </where>
+    </select>
+</mapper>

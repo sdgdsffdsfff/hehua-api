@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.DarenDAO">
+<!--
+    由系统于2014-08-08 01:02:14生成。
+-->
+<select id="getDarenListByUserIds" resultType="com.hehua.item.domain.Daren">
+    select `id`,`userid`,`name`,`location`,`stage`,`title`,`description`,`avatarid`,`gender`,`birthday` from `daren` where `userid` in <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">#{id}</foreach>
+</select>
+
+</mapper>

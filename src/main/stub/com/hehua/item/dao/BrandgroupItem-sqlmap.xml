@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hehua.item.dao.BrandgroupItemDAO">
+<!--
+    由系统于2014-09-12 15:02:10生成。
+-->
+<!--<select id="getGroupItemsByBrandGroupIds" resultType="com.hehua.item.domain.BrandgroupItem">-->
+    <!--select * from `brandgroup_item` where `groupid` in <foreach item="groupid" index="index" collection="groupIds" open="(" separator="," close=")">#{groupid}</foreach>-->
+<!--</select>-->
+
+</mapper>
