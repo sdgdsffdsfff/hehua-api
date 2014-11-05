@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<!-- !!禁止使用stdout这个appender -->
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+		</layout>
+	</appender>
+	<appender name="stdoutFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/logs/hehua-api/stdout.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="accessLogFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/logs/hehua-api/access.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="requestLogFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/logs/hehua-api/request.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} ## %m%n" />
+		</layout>
+	</appender>
+
+    <appender name="payFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/pay.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="paiuFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/paiu.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="cartFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/cart.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="orderFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/order.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="closeOrderFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/closeorder.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="notifyLogFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/notifylog.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="deliveryFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/delivery.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="refundFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/refund.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+        </layout>
+    </appender>
+
+	<appender name="flumeFailoverAppender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/flume.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m" />
+        </layout>
+    </appender>
+
+    <appender name="FlushSalesRunner" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/data/logs/hehua-api/FlushSalesRunner.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m%n" />
+        </layout>
+    </appender>
+
+    <appender name="timecostFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/logs/hehua-api/timecost.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss,SSS} %-5p %c(%F:%L) ## %m%n" />
+		</layout>
+	</appender>
+
+    <appender name="asyncAppender" class="org.apache.log4j.AsyncAppender">
+        <param name="BufferSize" value="1" />
+        <param name="blocking" value="false" />
+        <appender-ref ref="flumeFailoverAppender"/>
+    </appender>
+
+    <logger name="com.hehua.order.listener.PayNotifyListener" additivity="false">
+        <level value="info" />
+        <appender-ref ref="payFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.listener.SyncOrderToPaiuListener" additivity="false">
+        <level value="info" />
+        <appender-ref ref="paiuFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.service.CartService" additivity="false">
+        <level value="info" />
+        <appender-ref ref="cartFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.service.OrdersService" additivity="false">
+        <level value="info" />
+        <appender-ref ref="orderFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.script.CloseOrderRunner" additivity="false">
+        <level value="info" />
+        <appender-ref ref="closeOrderFile"></appender-ref>
+    </logger>
+
+    <logger name="notifyLogFile" additivity="false">
+        <level value="info" />
+        <appender-ref ref="notifyLogFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.service.RefundService" additivity="false">
+        <level value="info" />
+        <appender-ref ref="refundFile"></appender-ref>
+    </logger>
+
+    <logger name="flumeEventLogger" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="flumeFailoverAppender"></appender-ref>
+    </logger>
+
+    <logger name="flumeEventFailoverLogger" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="flumeFailoverAppender"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.service.DeliveryService" additivity="false">
+        <level value="info" />
+        <appender-ref ref="deliveryFile"></appender-ref>
+    </logger>
+
+	<logger name="accessLog" additivity="false">
+        <level value="info" />
+        <appender-ref ref="accessLogFile"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.order.script.FlushSalesRunner" additivity="false">
+        <level value="info" />
+        <appender-ref ref="FlushSalesRunner"></appender-ref>
+    </logger>
+
+    <logger name="com.hehua.framework.web.filter.RequestLoggingFilter" additivity="false">
+    	<level value="trace" />
+        <appender-ref ref="requestLogFile"></appender-ref>
+    </logger>
+
+    <logger name="timecost" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="timecostFile"></appender-ref>
+    </logger>
+
+    <root>
+		<level value="info" />
+		<appender-ref ref="stdoutFile" />
+	</root>
+
+</log4j:configuration>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.hehua.api" />
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> 
+        <property name="registerDefaultFormatters" value="false" /> 
+        <property name="formatters"> 
+            <set>
+                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory" />
+            </set>
+        </property> 
+        <property name="formatterRegistrars"> 
+            <set>
+              <bean class="org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar"></bean>
+            </set>
+      </property> 
+    </bean>
+
+    
+	
+	<bean id="urlMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<bean class="com.hehua.framework.web.interceptor.TokenInterceptor" />
+                <bean class="com.hehua.framework.web.interceptor.GobalVariableInterceptor" />
+				<bean class="com.hehua.framework.web.interceptor.ClientIdInterceptor" />
+				<bean class="com.hehua.framework.web.interceptor.AccessLogInterceptor" />
+                <!--
+                    注意：UserAccessInfoInterceptor拦截器依赖TraceIdInterceptor、ClientIdInterceptor、GobalVariableInterceptor里设置的变量，
+                    所以UserAccessInfoInterceptor必须写在这些拦截器之后
+                -->
+                <bean class="com.hehua.framework.web.interceptor.UserAccessInfoInterceptor" />
+            </list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="com.hehua.framework.web.util.HehuaFastJsonHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<!-- 
+				<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" />
+				 -->
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+			</list>
+		</property>
+		<property name="customArgumentResolvers">
+			<list></list>
+		</property>
+	</bean>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" />
+	
+	<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" />
+	
+	<bean id="requestContextFilter" class="org.springframework.web.filter.RequestContextFilter">
+		<property name="threadContextInheritable" value="true" />
+	</bean>
+	
+	<bean id="encodingFilter" class="org.springframework.web.filter.CharacterEncodingFilter">
+		<property name="encoding" value="utf-8" />
+		<property name="forceEncoding" value="true" />
+	</bean>
+	
+	<bean class="com.hehua.framework.web.exception.ExceptionResolver"></bean>
+	
+	<bean id="loggingFilter" class="com.hehua.framework.web.filter.RequestLoggingFilter"></bean>
+	
+	<bean id="timecostLoggingFilter" class="com.hehua.framework.web.filter.TimecostLoggingFilter"></bean>
+	
+	<bean id="appFilters" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map request-matcher="ant">
+			<security:filter-chain filters="timecostLoggingFilter,loggingFilter,requestContextFilter,encodingFilter" pattern="/**" />
+		</security:filter-chain-map>
+	</bean>
+</beans>
